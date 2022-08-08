@@ -1,0 +1,46 @@
+body {
+    --main-color-1: #37DEFF;
+}
+
+.App {
+    background-color: #5D5B5C;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter {
+    width: 50vw;
+    height: 40vh;
+    border: var(--main-color-1) 3px solid;
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.screen {
+    justify-self: center;
+    align-self: center;
+
+    margin: 10px;
+    border: var(--main-color-1) 3px solid;
+    border-radius: 25px;
+    flex: 1;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controller {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
