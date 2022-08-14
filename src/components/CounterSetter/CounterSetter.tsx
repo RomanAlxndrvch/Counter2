@@ -1,12 +1,18 @@
-import React from "react";
+import React, {Dispatch} from "react";
 import classes from './CounterSetter.module.css'
-import {Button, TextField, ThemeProvider} from "@mui/material";
+import {Button, ThemeProvider} from "@mui/material";
 import {theme} from "../Theme";
 import {useNavigate} from "react-router-dom";
 import InputForm from "./InputForm/InputForm";
+import {stateType} from "../reducers/Values-reducer";
 
+type CounterSetterPropsType = {
+    values: stateType
+    increaseMaxValueBtnHandler: (e: number) => void
+    increaseStartValueBtnHandler: (e: number) => void
+}
 
-const CounterSetter = () => {
+const CounterSetter = (props: CounterSetterPropsType) => {
     const navigate = useNavigate()
 
     const counterSetterBtnHandler = () => {
@@ -16,11 +22,16 @@ const CounterSetter = () => {
     return (
         <ThemeProvider theme={theme}>
             <div className={classes.counter_setter}>
+
                 <div className={classes.settings_container}>
+                    <InputForm title={'Max Value:'}
+                               value={props.values.maxValue}
+                               onChange={props.increaseMaxValueBtnHandler}
+                    />
 
-                    <InputForm/>
-
-                    <InputForm/>
+                    <InputForm title={'Start Value: '}
+                               value={props.values.startValue}
+                               onChange={props.increaseStartValueBtnHandler}/>
                 </div>
 
                 <div className={classes.btn_container}>
@@ -28,7 +39,6 @@ const CounterSetter = () => {
                 </div>
 
             </div>
-
 
         </ThemeProvider>
 

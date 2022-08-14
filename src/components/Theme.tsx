@@ -20,16 +20,13 @@ export const theme = createTheme({
         MuiOutlinedInput: {
             styleOverrides: {
                 notchedOutline: {
-                    ":hover": {},
-                    borderColor: mainColor,
-                    color: mainColor,
+                    fontSize: '25px'
 
                 },
                 root: {
+                    fontSize: '24px',
                     color: mainColor,
-                    borderColor: mainColor
                 },
-
             }
         }
         ,
@@ -37,9 +34,11 @@ export const theme = createTheme({
             styleOverrides: {
                 outlined: {
                     color: mainColor,
-                    fontSize: '16px'
+                    fontSize: '25px'
                 }
-            }
+
+
+            },
         },
     }
 })

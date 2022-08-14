@@ -1,19 +1,35 @@
-import React from "react";
-import {theme} from "../../Theme";
+import React, {ChangeEvent} from "react";
 import classes from "./InputForm.module.css";
 import {TextField} from "@mui/material";
 
 
-const InputForm = () => {
+type InputFormPropsType = {
+    title: string
+    value: number
+    onChange: (e: number) => void
+}
+
+const InputForm = (props: InputFormPropsType) => {
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        props.onChange(parseInt(e.currentTarget.value))
+    }
+
     return (
         <div className={classes.input_container}>
-            <span className={classes.text}>Max Value: </span> <TextField
-            type={"number"}
-            label="Max Value:"
-            focused
-        />
+            <TextField
+                onChange={onChangeHandler}
+                value={props.value}
+                inputProps={{style: {textAlign: 'center'}}}
+                type={"number"}
+                label={props.title}
+                error={props.value < 0}
+                focused
+            />
         </div>
     )
 }
 
 export default InputForm
+
+
