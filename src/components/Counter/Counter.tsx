@@ -1,7 +1,7 @@
 import classes from "./Counter.module.css";
 import React from "react";
 import {Button} from "@mui/material";
-import {NavLink, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const Counter = () => {
     const navigate = useNavigate()

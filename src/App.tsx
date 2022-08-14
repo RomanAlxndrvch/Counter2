@@ -13,6 +13,7 @@ function App() {
                 <div className={classes.App}>
                     <Routes>
                         <Route path={'/'} element={<Counter/>}/>
+                        <Route path={'/counter'} element={<Counter/>}/>
                         <Route path={'/set'} element={<CounterSetter/>}/>
                     </Routes>
                 </div>

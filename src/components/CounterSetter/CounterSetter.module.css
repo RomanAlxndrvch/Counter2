@@ -1,0 +1,53 @@
+
+.counter_setter {
+    width: 50vw;
+    height: 40vh;
+    border: var(--main-color-1) 3px solid;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+}
+
+.input_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.settings_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 40%;
+
+    border: var(--main-color-1) 3px solid;
+    border-radius: 25px;
+    padding: 20px;
+}
+
+.text {
+    font-size: 24px;
+    color: var(--main-color-1);
+    font-family: 'Times New Roman';
+}
+
+
+.btn_container {
+    border: var(--main-color-1) 3px solid;
+    border-radius: 25px;
+
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    width: 25%;
+}
+
+
