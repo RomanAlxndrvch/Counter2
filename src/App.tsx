@@ -7,7 +7,7 @@ import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import CounterSetter from "./components/CounterSetter/CounterSetter";
 import {
     IncreaseMaxValueAC,
-    IncreaseStartValueAC, IncreaseValueAC,
+    IncreaseStartValueAC, IncreaseValueAC, ResetValuesAC,
     setErrorAC,
     ValuesReducer
 } from "./components/reducers/values-reducer";
@@ -37,6 +37,10 @@ function App() {
         dispatchValues(setErrorAC())
     }
 
+    const resetHandler = () => {
+        dispatchValues(ResetValuesAC())
+    }
+
 
     return (
         <BrowserRouter>
@@ -48,6 +52,8 @@ function App() {
                             <Counter currentValue={values.currentValue}
                                      error={values.error}
                                      increaseValue={IncreaseValueHandler}
+                                     resetValues={resetHandler}
+                                     state={values}
                             />}
                         />
                         <Route path={'/set'} element={<CounterSetter

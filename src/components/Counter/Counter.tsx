@@ -1,15 +1,19 @@
 import classes from "./Counter.module.css";
-import React from "react";
+import React, {useState} from "react";
 import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
+import {StateType} from "../reducers/values-reducer";
 
 type CounterPropsType = {
     currentValue: number
     error: boolean
     increaseValue: () => void
+    resetValues: () => void
+    state: StateType
 }
 
 const Counter = (props: CounterPropsType) => {
+
     const navigate = useNavigate()
 
     const setBtnHandler = () => {
@@ -21,21 +25,23 @@ const Counter = (props: CounterPropsType) => {
     }
 
     const ResetBtnHandler = () => {
-
+        props.resetValues()
     }
 
     const errorNumber = props.error ? {color: 'red'} : {}
+    const displayText = props.state.startValue > props.state.maxValue ? 'Wrong settings!' : `${props.currentValue}`
+    const btnDisabler = props.state.error || props.state.startValue === props.state.maxValue
 
     return (
 
         <div className={classes.counter}>
             <div className={classes.screen}>
                 <span className={classes.number}
-                      style={errorNumber}>{props.currentValue}</span>
+                      style={errorNumber}>{displayText}</span>
             </div>
             <div className={classes.controller}>
 
-                <Button disabled={props.error}
+                <Button disabled={btnDisabler}
                         variant={"contained"}
                         className={classes.btn}
                         onClick={IncreaseBtnHandler}>Inc</Button>

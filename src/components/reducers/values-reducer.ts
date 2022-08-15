@@ -23,7 +23,10 @@ export type IncreaseValue = {
 export type setError = {
     type: 'SET_ERROR'
 }
-export type ActionType = IncreaseMaxValue | IncreaseStartValue | setError | IncreaseValue
+export type ResetValues = {
+    type: 'RESET_VALUES'
+}
+export type ActionType = IncreaseMaxValue | IncreaseStartValue | setError | IncreaseValue | ResetValues
 
 export const ValuesReducer = (state: StateType, action: ActionType): StateType => {
 
@@ -35,7 +38,12 @@ export const ValuesReducer = (state: StateType, action: ActionType): StateType =
             return {...state, startValue: action.payload.value, currentValue: action.payload.value}
         }
         case "INCREASE_VALUE": {
-            return {...state, currentValue: state.currentValue++}
+            if (state.currentValue === state.maxValue) {
+                return {...state, error: true}
+            }
+            else {
+                return {...state, currentValue: state.currentValue++}
+            }
         }
         case "SET_ERROR": {
             if (state.startValue > state.maxValue) {
@@ -47,6 +55,9 @@ export const ValuesReducer = (state: StateType, action: ActionType): StateType =
             else {
                 return {...state, error: false}
             }
+        }
+        case "RESET_VALUES": {
+            return {...state, error: false, maxValue: 0, currentValue: 0, startValue: 0}
         }
     }
 }
@@ -78,5 +89,11 @@ export const setErrorAC = (): setError => {
 export const IncreaseValueAC = (): IncreaseValue => {
     return {
         type: "INCREASE_VALUE"
+    }
+}
+
+export const ResetValuesAC = (): ResetValues => {
+    return {
+        type: "RESET_VALUES"
     }
 }
