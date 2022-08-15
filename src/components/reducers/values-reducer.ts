@@ -32,10 +32,10 @@ export const ValuesReducer = (state: StateType, action: ActionType): StateType =
             return {...state, maxValue: action.payload.value}
         }
         case "INCREASE-START-VALUE": {
-            return {...state, startValue: action.payload.value}
+            return {...state, startValue: action.payload.value, currentValue: action.payload.value}
         }
         case "INCREASE_VALUE": {
-            return {...state, currentValue: state.startValue}
+            return {...state, currentValue: state.currentValue++}
         }
         case "SET_ERROR": {
             if (state.startValue > state.maxValue) {

@@ -30,7 +30,6 @@ function App() {
     }
 
     const IncreaseValueHandler = () => {
-        console.log(values)
         dispatchValues(IncreaseValueAC())
     }
 
