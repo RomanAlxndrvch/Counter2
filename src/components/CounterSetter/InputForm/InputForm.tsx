@@ -1,18 +1,24 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import classes from "./InputForm.module.css";
 import {TextField} from "@mui/material";
+import {StateType} from "../../reducers/values-reducer";
 
 
 type InputFormPropsType = {
     title: string
     value: number
+    error: boolean
+
     onChange: (e: number) => void
+    setError: () => void
+    values?: StateType
 }
 
 const InputForm = (props: InputFormPropsType) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.onChange(parseInt(e.currentTarget.value))
+        props.setError()
     }
 
     return (
@@ -22,8 +28,8 @@ const InputForm = (props: InputFormPropsType) => {
                 value={props.value}
                 inputProps={{style: {textAlign: 'center'}}}
                 type={"number"}
-                label={props.title}
-                error={props.value < 0}
+                label={`${props.title}`}
+                error={props.error}
                 focused
             />
         </div>

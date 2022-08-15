@@ -3,15 +3,22 @@ import classes from './App.module.css';
 import Counter from "./components/Counter/Counter";
 import {theme} from "./components/Theme";
 import {ThemeProvider} from "@mui/material";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import CounterSetter from "./components/CounterSetter/CounterSetter";
-import {IncreaseMaxValueAC, IncreaseStartValueAC, ValuesReducer} from "./components/reducers/Values-reducer";
+import {
+    IncreaseMaxValueAC,
+    IncreaseStartValueAC, IncreaseValueAC,
+    setErrorAC,
+    ValuesReducer
+} from "./components/reducers/values-reducer";
 
 function App() {
 
     const [values, dispatchValues] = useReducer(ValuesReducer, {
         maxValue: 0,
-        startValue: 0
+        startValue: 0,
+        currentValue: 0,
+        error: false
     })
 
     const increaseMaxValueBtnHandler = (e: number) => {
@@ -22,18 +29,33 @@ function App() {
         dispatchValues(IncreaseStartValueAC(e))
     }
 
+    const IncreaseValueHandler = () => {
+        console.log(values)
+        dispatchValues(IncreaseValueAC())
+    }
+
+    const setErrorHandler = () => {
+        dispatchValues(setErrorAC())
+    }
+
 
     return (
         <BrowserRouter>
             <ThemeProvider theme={theme}>
                 <div className={classes.App}>
                     <Routes>
-                        <Route path={'/'} element={<Counter/>}/>
-                        <Route path={'/counter'} element={<Counter/>}/>
+                        <Route path={'/'} element={<Navigate to={'/counter'}/>}></Route>
+                        <Route path={'/counter'} element={
+                            <Counter currentValue={values.currentValue}
+                                     error={values.error}
+                                     increaseValue={IncreaseValueHandler}
+                            />}
+                        />
                         <Route path={'/set'} element={<CounterSetter
                             values={values}
                             increaseMaxValueBtnHandler={increaseMaxValueBtnHandler}
                             increaseStartValueBtnHandler={increaseStartValueBtnHandler}
+                            setError={setErrorHandler}
                         />}/>
                     </Routes>
                 </div>
