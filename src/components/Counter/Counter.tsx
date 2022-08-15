@@ -1,12 +1,10 @@
 import classes from "./Counter.module.css";
-import React, {useState} from "react";
+import React from "react";
 import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {StateType} from "../reducers/values-reducer";
 
 type CounterPropsType = {
-    currentValue: number
-    error: boolean
     increaseValue: () => void
     resetValues: () => void
     state: StateType
@@ -28,8 +26,8 @@ const Counter = (props: CounterPropsType) => {
         props.resetValues()
     }
 
-    const errorNumber = props.error ? {color: 'red'} : {}
-    const displayText = props.state.startValue > props.state.maxValue ? 'Wrong settings!' : `${props.currentValue}`
+    const errorNumber = props.state.error ? {color: 'red'} : {}
+    const displayText = props.state.startValue > props.state.maxValue ? 'Wrong settings!' : `${props.state.currentValue}`
     const btnDisabler = props.state.error || props.state.startValue === props.state.maxValue
 
     return (

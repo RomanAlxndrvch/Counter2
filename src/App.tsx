@@ -49,9 +49,7 @@ function App() {
                     <Routes>
                         <Route path={'/'} element={<Navigate to={'/counter'}/>}></Route>
                         <Route path={'/counter'} element={
-                            <Counter currentValue={values.currentValue}
-                                     error={values.error}
-                                     increaseValue={IncreaseValueHandler}
+                            <Counter increaseValue={IncreaseValueHandler}
                                      resetValues={resetHandler}
                                      state={values}
                             />}

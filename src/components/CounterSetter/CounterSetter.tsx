@@ -30,7 +30,6 @@ const CounterSetter = (props: CounterSetterPropsType) => {
                                error={props.values.error}
                                onChange={props.increaseMaxValueBtnHandler}
                                setError={props.setError}
-                               values={props.values}
                     />
 
                     <InputForm title={'Start Value: '}
@@ -38,7 +37,6 @@ const CounterSetter = (props: CounterSetterPropsType) => {
                                error={props.values.error}
                                onChange={props.increaseStartValueBtnHandler}
                                setError={props.setError}
-                               values={props.values}
                     />
                 </div>
 

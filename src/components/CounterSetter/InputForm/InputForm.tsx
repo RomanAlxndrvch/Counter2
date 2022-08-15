@@ -1,8 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import classes from "./InputForm.module.css";
 import {TextField} from "@mui/material";
-import {StateType} from "../../reducers/values-reducer";
-
 
 type InputFormPropsType = {
     title: string
@@ -11,7 +9,6 @@ type InputFormPropsType = {
 
     onChange: (e: number) => void
     setError: () => void
-    values?: StateType
 }
 
 const InputForm = (props: InputFormPropsType) => {
