@@ -56,7 +56,7 @@ export const ValuesReducer = (state: StateType, action: ActionType): StateType =
             }
         }
         case "RESET_VALUES": {
-            return {...state, error: false, maxValue: 0, currentValue: 0, startValue: 0}
+            return {...state, error: false, currentValue: 0,  /*maxValue: 0, startValue: 0*/}
         }
     }
 }
