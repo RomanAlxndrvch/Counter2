@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useEffect, useReducer} from 'react';
 import classes from './App.module.css';
 import Counter from "./components/Counter/Counter";
 import {theme} from "./components/Theme";

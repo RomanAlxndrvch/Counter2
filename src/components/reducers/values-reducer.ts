@@ -37,7 +37,7 @@ export const ValuesReducer = (state: StateType, action: ActionType): StateType =
             return {...state, startValue: action.payload.value, currentValue: action.payload.value}
         }
         case "INCREASE_VALUE": {
-            if (state.currentValue === state.maxValue) {
+            if (state.currentValue >= state.maxValue) {
                 return {...state, error: true}
             }
             else {
@@ -45,10 +45,7 @@ export const ValuesReducer = (state: StateType, action: ActionType): StateType =
             }
         }
         case "SET_ERROR": {
-            if (state.startValue > state.maxValue) {
-                return {...state, error: true}
-            }
-            if ((state.startValue | state.maxValue) < 0) {
+            if (state.startValue > state.maxValue || (state.startValue | state.maxValue) < 0 || state.currentValue >= state.maxValue) {
                 return {...state, error: true}
             }
             else {
@@ -56,7 +53,7 @@ export const ValuesReducer = (state: StateType, action: ActionType): StateType =
             }
         }
         case "RESET_VALUES": {
-            return {...state, error: false, currentValue: 0,  /*maxValue: 0, startValue: 0*/}
+            return {...state, error: false, currentValue: state.startValue,  /*maxValue: 0, startValue: 0*/}
         }
     }
 }
