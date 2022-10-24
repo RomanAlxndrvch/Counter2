@@ -1,17 +1,18 @@
 import classes from "./Counter.module.css";
-import React from "react";
+import React, {useEffect} from "react";
 import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import {StateType} from "../reducers/values-reducer";
+import {IncreaseValueAC, ResetValuesAC, setErrorAC, StateType} from "../reducers/values-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../reducers/store";
 
-type CounterPropsType = {
-    increaseValue: () => void
-    resetValues: () => void
-    state: StateType
-}
 
-const Counter = (props: CounterPropsType) => {
+const Counter = () => {
 
+    const values = useSelector<AppRootStateType, StateType>((state) => {
+        return state.values
+    })
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const setBtnHandler = () => {
@@ -19,16 +20,21 @@ const Counter = (props: CounterPropsType) => {
     }
 
     const IncreaseBtnHandler = () => {
-        props.increaseValue()
+        dispatch(IncreaseValueAC())
     }
 
     const ResetBtnHandler = () => {
-        props.resetValues()
+        dispatch(ResetValuesAC())
     }
+    useEffect(() => {
+        if (values.currentValue >= values.maxValue) {
+            dispatch(setErrorAC())
+        }
+    }, [values.currentValue])
 
-    const errorNumber = props.state.error ? {color: 'red'} : {}
-    const displayText = props.state.startValue > props.state.maxValue ? 'Wrong settings!' : `${props.state.currentValue}`
-    const btnDisabler = props.state.error || props.state.startValue === props.state.maxValue
+    const errorNumber = values.error ? {color: 'red'} : {}
+    const displayText = values.startValue > values.maxValue ? 'Wrong settings!' : `${values.currentValue}`
+    const btnDisabler = values.error || values.startValue === values.maxValue
 
     return (
 

@@ -28,7 +28,14 @@ export type ResetValues = {
 }
 export type ActionType = IncreaseMaxValue | IncreaseStartValue | setError | IncreaseValue | ResetValues
 
-export const ValuesReducer = (state: StateType, action: ActionType): StateType => {
+const initialValues: StateType = {
+    maxValue: 0,
+    startValue: 0,
+    currentValue: 0,
+    error: false
+}
+
+export const ValuesReducer = (state: StateType = initialValues, action: ActionType): StateType => {
     switch (action.type) {
         case "INCREASE-MAX-VALUE": {
             return {...state, maxValue: action.payload.value}
@@ -41,7 +48,7 @@ export const ValuesReducer = (state: StateType, action: ActionType): StateType =
                 return {...state, error: true}
             }
             else {
-                return {...state, currentValue: state.currentValue++}
+                return {...state, currentValue: state.currentValue + 1}
             }
         }
         case "SET_ERROR": {
@@ -54,6 +61,9 @@ export const ValuesReducer = (state: StateType, action: ActionType): StateType =
         }
         case "RESET_VALUES": {
             return {...state, error: false, currentValue: state.startValue,  /*maxValue: 0, startValue: 0*/}
+        }
+        default: {
+            return state
         }
     }
 }

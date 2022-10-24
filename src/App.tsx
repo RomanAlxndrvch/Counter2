@@ -13,35 +13,6 @@ import {
 } from "./components/reducers/values-reducer";
 
 function App() {
-
-    const [values, dispatchValues] = useReducer(ValuesReducer, {
-        maxValue: 0,
-        startValue: 0,
-        currentValue: 0,
-        error: false
-    })
-
-    const increaseMaxValueBtnHandler = (e: number) => {
-        dispatchValues(IncreaseMaxValueAC(e))
-    }
-
-    const increaseStartValueBtnHandler = (e: number) => {
-        dispatchValues(IncreaseStartValueAC(e))
-    }
-
-    const IncreaseValueHandler = () => {
-        dispatchValues(IncreaseValueAC())
-    }
-
-    const setErrorHandler = () => {
-        dispatchValues(setErrorAC())
-    }
-
-    const resetHandler = () => {
-        dispatchValues(ResetValuesAC())
-    }
-
-
     return (
         <BrowserRouter>
             <ThemeProvider theme={theme}>
@@ -49,16 +20,9 @@ function App() {
                     <Routes>
                         <Route path={'/'} element={<Navigate to={'/counter'}/>}></Route>
                         <Route path={'/counter'} element={
-                            <Counter increaseValue={IncreaseValueHandler}
-                                     resetValues={resetHandler}
-                                     state={values}
-                            />}
-                        />
+                            <Counter/>}/>
                         <Route path={'/set'} element={<CounterSetter
-                            values={values}
-                            increaseMaxValueBtnHandler={increaseMaxValueBtnHandler}
-                            increaseStartValueBtnHandler={increaseStartValueBtnHandler}
-                            setError={setErrorHandler}
+
                         />}/>
                     </Routes>
                 </div>

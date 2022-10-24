@@ -4,16 +4,28 @@ import {Button, ThemeProvider} from "@mui/material";
 import {theme} from "../Theme";
 import {useNavigate} from "react-router-dom";
 import InputForm from "./InputForm/InputForm";
-import {StateType} from "../reducers/values-reducer";
+import {IncreaseMaxValueAC, IncreaseStartValueAC, setErrorAC, StateType} from "../reducers/values-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../reducers/store";
 
-type CounterSetterPropsType = {
-    values: StateType
-    increaseMaxValueBtnHandler: (e: number) => void
-    increaseStartValueBtnHandler: (e: number) => void
-    setError: () => void
-}
+const CounterSetter = () => {
+    const values = useSelector<AppRootStateType, StateType>((state) => {
+        return state.values
+    })
 
-const CounterSetter = (props: CounterSetterPropsType) => {
+    const dispatch = useDispatch()
+
+    const increaseMaxValueBtnHandler = (num: number) => {
+        dispatch(IncreaseMaxValueAC(num))
+    }
+    const increaseStartValueBtnHandler = (num: number) => {
+        dispatch(IncreaseStartValueAC(num))
+    }
+
+    const setErrorBtnHandler = () => {
+        dispatch(setErrorAC())
+    }
+
     const navigate = useNavigate()
 
     const counterSetterBtnHandler = () => {
@@ -26,17 +38,17 @@ const CounterSetter = (props: CounterSetterPropsType) => {
 
                 <div className={classes.settings_container}>
                     <InputForm title={'Max Value:'}
-                               value={props.values.maxValue}
-                               error={props.values.error}
-                               onChange={props.increaseMaxValueBtnHandler}
-                               setError={props.setError}
+                               value={values.maxValue}
+                               error={values.error}
+                               onChange={increaseMaxValueBtnHandler}
+                               setError={setErrorBtnHandler}
                     />
 
                     <InputForm title={'Start Value: '}
-                               value={props.values.startValue}
-                               error={props.values.error}
-                               onChange={props.increaseStartValueBtnHandler}
-                               setError={props.setError}
+                               value={values.startValue}
+                               error={values.error}
+                               onChange={increaseStartValueBtnHandler}
+                               setError={setErrorBtnHandler}
                     />
                 </div>
 
